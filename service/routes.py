@@ -60,7 +60,6 @@ def create_accounts():
 ######################################################################
 # LIST ALL ACCOUNTS
 ######################################################################
-
 @app.route("/accounts", methods=["GET"])
 def list_accounts():
     """
@@ -73,7 +72,7 @@ def list_accounts():
     accounts = Account.all()
     # create a list of serialize() accounts
     account_list = [account.serialize() for account in accounts]
-    # log the number of accounts being returned in the list 
+    # log the number of accounts being returned in the list
     app.logger.info(f"Number of accounts {len(account_list)}")
     # return the list with a return code of status.HTTP_200_OK
     return account_list, status.HTTP_200_OK
@@ -89,7 +88,7 @@ def get_accounts(account_id):
     This endpoint will get an Account
     """
     app.logger.info(f"Request to read an Account with id: {account_id}")
-    account = Account.find(account_id)    
+    account = Account.find(account_id)
     if not account:
         abort(status.HTTP_404_NOT_FOUND, f"Account {account_id} not found")
 
