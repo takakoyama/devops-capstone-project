@@ -9,6 +9,7 @@ python-dotenv==0.21.1
 
 # security
 Flask-Talisman==1.0.0
+Flask-Cors==3.0.10
 
 # Runtime dependencies
 gunicorn==20.1.0
