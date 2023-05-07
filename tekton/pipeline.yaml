@@ -48,40 +48,9 @@ spec:
       - name: args
         value: ["--count", "--max-complexity=10", "--max-line-length=127", "--statistics"]
       runAfter:
-        - clone
----
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  name: nose
-spec:
-  description: "this task will run nosetests on the provided input"
-  workspaces:
-    - name: source
-  params:
-    - name: args
-      description: args for nosetests
-      type: string
-      default: "-v"
-    - name: database_uri
-      description: uri for the database
-      type: string
-      default: "sqlite:///test.db"
-  steps:
-    - name: nosetests
-      image: python:3.9-slim
-      workingDir: $(workspaces.source.path)
-      env:
-        - name: DATABASE_URI
-          value: $(params.database_uri)
-      script: |
-        #!/bin/bash
-        set -e
-        python -m pip install --upgrade pip wheel
-        pip install -qr requirements.txt
-        nosetests $(params.args)
+        - clone  
     - name: tests
-      workspace: 
+      workspaces: 
         - name: source
           workspace: pipeline-workspace          
       taskRef:
@@ -90,7 +59,8 @@ spec:
       - name: database_uri
         value: "sqlite:///test.db"
       - name: args
-        value: ["-v", "--with-spec", "--with-color"]
+        value: "-v --with-spec --spec-color"
       runAfter:
         - clone
+
 
