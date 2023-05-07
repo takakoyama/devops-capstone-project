@@ -22,6 +22,7 @@ BASE_URL = "/accounts"
 
 HTTPS_ENVIRON = {'wsgi.url_scheme': 'https'}
 
+
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
@@ -159,7 +160,6 @@ class TestAccountService(TestCase):
         # assert that the resp.status_code is status.HTTP_404_NOT_FOUND
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
 
-
     def test_update_account(self):
         """It should Update an existing Account"""
         # create an Account to update
@@ -171,7 +171,7 @@ class TestAccountService(TestCase):
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         # update the account
         # get the data from resp.get_json() as new_account
-        new_account = resp.get_json()        
+        new_account = resp.get_json()
         # change new_account["name"] to something known
         new_account["name"] = "Something Known"
         # send a self.client.put() request to the BASE_URL with a json payload of new_account
@@ -209,7 +209,7 @@ class TestAccountService(TestCase):
         }
 
         for key, value in headers.items():
-            self.assertEqual(resp.headers.get(key),value)
+            self.assertEqual(resp.headers.get(key), value)
     
     def test_cor(self):
         """It should be testing COR"""
