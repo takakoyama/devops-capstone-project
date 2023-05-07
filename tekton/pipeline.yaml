@@ -63,8 +63,8 @@ spec:
       description: args for nosetests
       type: string
       default: "-v"
-    - name: database_url
-      description: url for the database
+    - name: database_uri
+      description: uri for the database
       type: string
       default: "sqlite:///test.db"
   steps:
@@ -80,7 +80,6 @@ spec:
         python -m pip install --upgrade pip wheel
         pip install -qr requirements.txt
         nosetests $(params.args)
-    
     - name: tests
       workspace: 
         - name: source
@@ -88,10 +87,10 @@ spec:
       taskRef:
         name: nose
       params:
-        - name: database_uri
-          value: "sqlite:///test.db"
-        - name: args
-          value: ["-v", "--with-spec", "--with-color"]
+      - name: database_uri
+        value: "sqlite:///test.db"
+      - name: args
+        value: ["-v", "--with-spec", "--with-color"]
       runAfter:
         - clone
 
